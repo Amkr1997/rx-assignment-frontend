@@ -5,7 +5,9 @@ export const fetchAsyncTeachers = createAsyncThunk(
   "fetch/Teachers",
   async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/teachers`);
+      const response = await axios.get(
+        `https://rx-assignment-backend.vercel.app/teachers`
+      );
       const data = response.data;
       return data;
     } catch (error) {
@@ -19,7 +21,7 @@ export const addAsyncTeacher = createAsyncThunk(
   async (dataToAdd) => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/teachers`,
+        `https://rx-assignment-backend.vercel.app/teachers`,
         dataToAdd
       );
 
@@ -36,7 +38,7 @@ export const deleteAsyncTeacher = createAsyncThunk(
   async (teacherId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/teachers/${teacherId}`
+        `https://rx-assignment-backend.vercel.app/teachers/${teacherId}`
       );
       const data = response.data;
       return data;

@@ -5,7 +5,9 @@ export const fetchStudentsAsync = createAsyncThunk(
   "fetch/Student",
   async () => {
     try {
-      const response = await axios.get("http://localhost:3000/students");
+      const response = await axios.get(
+        "https://rx-assignment-backend.vercel.app/students"
+      );
       const data = response.data;
       return data;
     } catch (error) {
@@ -19,7 +21,7 @@ export const addStudentAsync = createAsyncThunk(
   async (dataToAdd) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/students",
+        "https://rx-assignment-backend.vercel.app/students",
         dataToAdd
       );
 
@@ -37,7 +39,7 @@ export const updateStudentAsync = createAsyncThunk(
   async (dataToUpdate) => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/students/${dataToUpdate._id}`,
+        `https://rx-assignment-backend.vercel.app/students/${dataToUpdate._id}`,
         dataToUpdate
       );
 
@@ -55,7 +57,7 @@ export const deleteStudentAsync = createAsyncThunk(
   async (studentId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/students/${studentId}`
+        `https://rx-assignment-backend.vercel.app/students/${studentId}`
       );
 
       const data = response.data;
