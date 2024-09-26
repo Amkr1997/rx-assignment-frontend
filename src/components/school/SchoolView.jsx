@@ -46,7 +46,7 @@ const SchoolView = () => {
       dispatch(setTopStudent(topPerformerStudent));
     }
 
-    if (teachers?.teachers?.length > 0) {
+    if (teachers?.teachers) {
       console.log("entered here");
       const totalNoOfTeacher = teachers.teachers.length;
       const totalSubjects = teachers.teachers.map((teacher) => teacher.subject);
