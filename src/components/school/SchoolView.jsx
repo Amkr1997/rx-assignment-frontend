@@ -47,6 +47,7 @@ const SchoolView = () => {
     }
 
     if (teachers?.teachers?.length > 0) {
+      console.log("entered here");
       const totalNoOfTeacher = teachers.teachers.length;
       const totalSubjects = teachers.teachers.map((teacher) => teacher.subject);
 
