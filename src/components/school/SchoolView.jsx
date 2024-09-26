@@ -17,6 +17,7 @@ const SchoolView = () => {
   const { teachers, status, error } = useSelector((state) => state.teachers);
   const dispatch = useDispatch();
 
+  /*
   const handleStudentStats = () => {
     if (students.length > 0) {
       const totalNoOfStud = students.length;
@@ -60,7 +61,7 @@ const SchoolView = () => {
 
       dispatch(updateTeacherStats(teacherStats));
     }
-  };
+  };*/
 
   useEffect(() => {
     dispatch(fetchStudentsAsync());
@@ -68,7 +69,49 @@ const SchoolView = () => {
   }, []);
 
   useEffect(() => {
-    handleStudentStats();
+    //handleStudentStats();
+    if (students.length > 0) {
+      const totalNoOfStud = students.length;
+      const attendanceSum = students.reduce((acc, curr) => {
+        acc += curr.attendance;
+        return acc;
+      }, 0);
+      const marksSum = students.reduce((acc, curr) => {
+        acc += curr.marks;
+        return acc;
+      }, 0);
+      const topPerformerMarks = Math.max(
+        ...students.map((student) => student.marks)
+      );
+
+      const studentStats = {
+        totalStudents: totalNoOfStud,
+        averageAttendance: attendanceSum / students.length,
+        averageMarks: marksSum / students.length,
+      };
+
+      const topPerformerStudent = students.find(
+        (student) => student.marks === topPerformerMarks
+      );
+
+      dispatch(updateSchoolStats(studentStats));
+      dispatch(setTopStudent(topPerformerStudent));
+    }
+
+    if (teachers?.teachers) {
+      console.log("entered here");
+      const totalNoOfTeacher = teachers.teachers.length;
+      const totalSubjects = teachers.teachers.map((teacher) => teacher.subject);
+
+      const teacherStats = {
+        allTeachers: totalNoOfTeacher,
+        allSubjects: totalSubjects.join(", "),
+      };
+
+      console.log(teacherStats);
+
+      dispatch(updateTeacherStats(teacherStats));
+    }
   }, [students]);
 
   console.log(teachers.teachers);

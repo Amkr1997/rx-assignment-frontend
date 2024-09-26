@@ -18,7 +18,7 @@ const schoolSlice = createSlice({
     },
 
     updateTeacherStats: (state, action) => {
-      console.log(action.payload);
+      //console.log(action.payload);
       state.updatedTeacherStats = action.payload;
     },
   },
