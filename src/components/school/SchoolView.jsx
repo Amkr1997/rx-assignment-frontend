@@ -14,7 +14,7 @@ const SchoolView = () => {
   const { updatedSchoolStats, topStudent, updatedTeacherStats } = useSelector(
     (state) => state.school
   );
-  const { teachers } = useSelector((state) => state.teachers);
+  const { teachers, status, error } = useSelector((state) => state.teachers);
   const dispatch = useDispatch();
 
   const handleStudentStats = () => {
@@ -70,31 +70,40 @@ const SchoolView = () => {
     handleStudentStats();
   }, [students]);
 
+  console.log(teachers.teachers);
+
   return (
     <>
       <Nav />
-      <section className="container py-3">
-        <h1 className="py-2">School View</h1>
-        <p>
-          Total Students: {updatedSchoolStats?.totalStudents || "Loading..."}
-        </p>
-        <p>
-          Average Attendance:{" "}
-          {updatedSchoolStats?.averageAttendance?.toFixed(2) || "Loading..."}
-        </p>
-        <p>
-          Average Marks:{" "}
-          {updatedSchoolStats?.averageMarks?.toFixed(2) || "Loading..."}
-        </p>
-        <p>Top Student: {topStudent?.name || "Loading..."}</p>
-        <p>
-          Total Teachers: {updatedTeacherStats?.allTeachers || "Loading..."}
-        </p>
-        <p>
-          Total Subjects Taught:{" "}
-          {updatedTeacherStats?.allSubjects?.toLowerCase() || "Loading..."}
-        </p>
-      </section>
+      {status === "loading" && (
+        <p className="display-3 text-center mt-5">Loading...</p>
+      )}
+      {error === "error" && <p>{error}</p>}
+
+      {teachers?.teachers?.length > 0 && (
+        <section className="container py-3">
+          <h1 className="py-2">School View</h1>
+          <p>
+            Total Students: {updatedSchoolStats?.totalStudents || "Loading..."}
+          </p>
+          <p>
+            Average Attendance:{" "}
+            {updatedSchoolStats?.averageAttendance?.toFixed(2) || "Loading..."}
+          </p>
+          <p>
+            Average Marks:{" "}
+            {updatedSchoolStats?.averageMarks?.toFixed(2) || "Loading..."}
+          </p>
+          <p>Top Student: {topStudent?.name || "Loading..."}</p>
+          <p>
+            Total Teachers: {updatedTeacherStats?.allTeachers || "Loading..."}
+          </p>
+          <p>
+            Total Subjects Taught:{" "}
+            {updatedTeacherStats?.allSubjects?.toLowerCase() || "Loading..."}
+          </p>
+        </section>
+      )}
     </>
   );
 };
