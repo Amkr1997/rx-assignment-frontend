@@ -55,6 +55,8 @@ const SchoolView = () => {
         allSubjects: totalSubjects.join(", "),
       };
 
+      console.log(teacherStats);
+
       dispatch(updateTeacherStats(teacherStats));
     }
   };
