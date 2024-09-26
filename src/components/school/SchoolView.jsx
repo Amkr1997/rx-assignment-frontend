@@ -112,7 +112,7 @@ const SchoolView = () => {
 
       dispatch(updateTeacherStats(teacherStats));
     }
-  }, [students]);
+  }, [students, teachers]);
 
   console.log(teachers.teachers);
 
